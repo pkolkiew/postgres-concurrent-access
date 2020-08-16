@@ -1,0 +1,23 @@
+
+
+spring:
+#  profiles: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+
+initial:
+  cron:
+    delay: 10000
+
+---
+
+spring:
+  profiles: postgres-docker
+  datasource:
+    url: jdbc:postgresql://postgres:5432/postgres

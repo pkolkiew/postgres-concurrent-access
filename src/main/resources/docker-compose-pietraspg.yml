@@ -1,0 +1,38 @@
+version: '3.5'
+
+networks:
+  pietras-cloud-local:
+    external: true
+    #          name: pietras-cloud-local
+
+services:
+        #  postgres:
+        #    image: postgres
+        #    networks:
+        #      - pietras-cloud-local 
+        #    ports:
+        #      - "5432:5432"
+        #    environment:
+        #      - "POSTGRES_USER=postgres"
+        #      - "POSTGRES_PASSWORD=postgres"
+        #      - "POSTGRES_DB=postgres"
+        #      - "PGDATA=/var/lib/postgresql/data/pgdata"
+        #    volumes:
+        #      - postgres-data-volume:/var/lib/postgresql/data
+  postgres-concurrent-acces:
+    image: pkolkiew/postgres-concurrent-acces
+    deploy:
+      replicas: 2
+    networks:
+      - pietras-cloud-local 
+    ports: 
+     - "8020:8080"
+       #    depends_on:
+            #      - postgres
+    environment:
+      JAVA_OPTS: "-Dspring.profiles.active=postgres-docker"
+      SPRING_CLOUD_INETUTILS_PREFERESNETWORKS: 10.0.10
+
+      #volumes:
+      #  postgres-data-volume:
+      #    external: true
